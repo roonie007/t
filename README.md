@@ -44,6 +44,15 @@ t("en", "unsafe", { html: '<img src="url" />' }); // "this is unsafe &lt;img src
 t("en", "unsafeButDoNotEscape", { html: '<img src="url" />' }); // 'this is unsafe <img src="url" />'
 ```
 
+## Methods
+
+**t(locale: _string_, key: **string**, args?: _Object_)**  
+Single phrase translation for a specific locale at a specific key.
+A data-containing object can also be passed as a parameter, allowing you to incorporate dynamic values into your translations.
+
+**load(locale: _string_, data: _Object_)**  
+Load translation data for a particular locale.
+
 ## License
 
 MIT
