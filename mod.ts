@@ -1,5 +1,5 @@
-import { flatten } from "https://deno.land/x/flatten@1.1.0/mod.ts";
-import { escapeHtml } from "https://deno.land/x/escape@1.4.0/mod.ts";
+import { flatten } from 'https://deno.land/x/flatten@1.1.0/mod.ts';
+import { escapeHtml } from 'https://deno.land/x/escape@1.4.0/mod.ts';
 
 export type FlattenData = Record<string, Record<string, string>>;
 
@@ -12,7 +12,7 @@ export const load = (locale: string, data: Record<string, unknown>): void => {
 export const t = (
   locale: string,
   key: string,
-  args?: Record<string, unknown>
+  args?: Record<string, unknown>,
 ) => {
   if (!flattenData[locale]) {
     return null;
@@ -30,14 +30,14 @@ export const t = (
 
     if (variables && variables.length > 0) {
       for (const variable of variables) {
-        const cleanVariableName = variable.replace(/[\{\}]/g, "");
+        const cleanVariableName = variable.replace(/[\{\}]/g, '');
 
-        if (variable.startsWith("{{") && variable.endsWith("}}")) {
+        if (variable.startsWith('{{') && variable.endsWith('}}')) {
           str = str.replaceAll(variable, flattenArgs[cleanVariableName]);
         } else {
           str = str.replaceAll(
             variable,
-            escapeHtml(flattenArgs[cleanVariableName])
+            escapeHtml(flattenArgs[cleanVariableName]),
           );
         }
       }
