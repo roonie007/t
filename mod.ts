@@ -1,4 +1,4 @@
-import { flatten } from "https://deno.land/x/flatten@1.0.0/mod.ts";
+import { flatten } from "https://deno.land/x/flatten@1.1.0/mod.ts";
 import { escapeHtml } from "https://deno.land/x/escape@1.4.0/mod.ts";
 
 export type FlattenData = Record<string, Record<string, string>>;
