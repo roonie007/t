@@ -1,7 +1,7 @@
-import { assertEquals } from 'https://deno.land/std/testing/asserts.ts';
-import { load, t } from './mod.ts';
+import { assertEquals } from 'https://deno.land/std@0.135.0/testing/asserts.ts';
+import { initTranslation, load } from './mod.ts';
 
-load('en', {
+const enTranslation = {
   welcome: 'Welcome',
   myName: 'My name is {first} {last}',
   myNameNestedArgs: 'My name is {user.name.first} {user.name.last}',
@@ -13,8 +13,9 @@ load('en', {
   },
   unsafe: 'this is unsafe {html}',
   unsafeButDoNotEscape: 'this is unsafe {{html}}',
-});
-load('fr', {
+};
+
+const frTranslation = {
   welcome: 'Bienvenue',
   myName: 'Mon nom est {first} {last}',
   myNameNestedArgs: 'Mon nom est {user.name.first} {user.name.last}',
@@ -26,7 +27,14 @@ load('fr', {
       },
     },
   },
-});
+  unsafe: 'ceci n\'est pas sécurisé {html}',
+  unsafeButDoNotEscape: 'ceci n\'est pas sécurisé {{html}}',
+};
+
+load('en', enTranslation);
+load('fr', frTranslation);
+
+const t = initTranslation<typeof enTranslation>();
 
 Deno.test({
   name: 'Simple translation',

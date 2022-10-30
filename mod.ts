@@ -1,5 +1,6 @@
 import { flatten } from 'https://deno.land/x/flatten@1.1.0/mod.ts';
 import { escapeHtml } from 'https://deno.land/x/escape@1.4.0/mod.ts';
+import { Translation } from './types.d.ts';
 
 export type FlattenData = Record<string, Record<string, string>>;
 
@@ -9,7 +10,7 @@ export const load = (locale: string, data: Record<string, unknown>): void => {
   flattenData[locale] = flatten(data) as Record<string, string>;
 };
 
-export const t = (
+const translate = (
   locale: string,
   key: string,
   args?: Record<string, unknown>,
@@ -47,4 +48,14 @@ export const t = (
   }
 
   return flattenData[locale][key];
+};
+
+export const initTranslation = <T = Record<string, unknown>>() => {
+  const t: Translation<T> = {
+    get(locale = 'en', key, args = {}) {
+      return translate(locale, key as string, args);
+    },
+  };
+
+  return t.get;
 };
