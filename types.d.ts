@@ -13,10 +13,12 @@ type PathImpl2<T> = PathImpl<T, keyof T> | keyof T;
 
 type Path<T> = PathImpl2<T> extends string | keyof T ? PathImpl2<T> : keyof T;
 
+export type Translations<T> = StringWithAutocomplete<Path<T>>;
+
 export interface Translation<T> {
-  get<K extends Path<T>>(
+  get(
     locale: string,
-    key: StringWithAutocomplete<K>,
+    key: Translations<T>,
     args?: Record<string, unknown>,
   ): string | null;
 }
